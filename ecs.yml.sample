@@ -1,0 +1,20 @@
+redis:
+  image: redis
+  cpu_shares: 100
+  mem_limit: 67108864
+  ports:
+    - "6379"
+
+web:
+  image: xxxxxxxxxxxxxxx.dkr.ecr.us-east-1.amazonaws.com/xxxxxxxxxxxxx
+  cpu_shares: 100
+  mem_limit: 268435456
+  volumes:
+    - /tmp/nginx/:/var/log/nginx
+  ports:
+    - "80:80"
+    - "4567:4567"
+  links:
+    - redis
+  environment:
+    - REDIS_HOST=redis
